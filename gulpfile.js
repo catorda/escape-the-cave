@@ -10,7 +10,7 @@ var gulpif = require('gulp-if');
 var buffer = require('gulp-buffer');
 var concat = require('gulp-concat');
 var cssmin = require('gulp-cssmin');
-var eslint = require('gulp-eslint');
+// var eslint = require('gulp-eslint');
 var htmlmin = require('gulp-htmlmin');
 var less = require('gulp-less');
 var micro = require('gulp-micro');
@@ -41,7 +41,8 @@ gulp.task('default', ['build']);
 gulp.task('build', ['build_source', 'build_index', 'build_styles']);
 
 gulp.task('build_source', function() {
-  var bundler = browserify('./src/main', {debug: !prod});
+  var bundler = browserify('./src/main', {debug: !prod})
+    .transform('babelify', {presets: ['es2015']});
   if (prod) {
     bundler.plugin(require('bundle-collapser/plugin'));
   }
@@ -78,11 +79,11 @@ gulp.task('clean', function() {
   rimraf.sync('dist');
 });
 
-gulp.task('lint', function() {
-  return gulp.src(['*.js', 'src/**/*.js'])
-    .pipe(eslint())
-    .pipe(eslint.format());
-});
+// gulp.task('lint', function() {
+//   return gulp.src(['*.js', 'src/**/*.js'])
+//     .pipe(eslint())
+//     .pipe(eslint.format());
+// });
 
 gulp.task('dist', ['build'], function() {
   if (!prod) {
@@ -98,7 +99,7 @@ gulp.task('dist', ['build'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/**/*.js', ['lint', 'build_source']);
+  gulp.watch('src/**/*.js', ['build_source']);
   gulp.watch('src/styles.less', ['build_styles']);
   gulp.watch('src/index.html', ['build_index']);
 });

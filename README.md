@@ -1,3 +1,5 @@
+Cloned from the JS13K Boilerplate
+
 # JS13KGames Boilerplate
 
 ## Quick start
