@@ -1,7 +1,7 @@
 
 const defaultOptions = {
-    initChance: 0.37,
-    numOfSteps: 3,
+    initChance: 0.39,
+    numOfSteps: 4,
     deathLimit: 3, 
     birthLimit: 4 
 }

@@ -18,9 +18,17 @@ function Spelunker(mx, my) {
         my = newY; 
     }
 
-    self.render = function(ctx) {
+    self.render = function(ctx, x, y, width, height) {
         
-        canvas.fillRect(mx, my, WIDTH, HEIGHT); 
+        ctx.fillStyle = '#ABABAB';
+        ctx.fillRect(x, y, width, height); 
+
 
     }
+
+    self.getX = function() { return mx; }; 
+
+    self.getY = function() { return my; }; 
 }
+
+module.exports = Spelunker;
